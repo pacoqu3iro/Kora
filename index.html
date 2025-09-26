@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K</title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para garantir que o canvas 2D ocupe o espaço do seu contêiner */
+        #sky-canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+        /* Transições suaves para as seções de conteúdo */
+        .content-section {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        /* Animação para a tela de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        #entry-screen {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        #entry-screen.hidden {
+            animation: fadeOut 1s ease-in forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Tela de Entrada -->
+    <div id="entry-screen" class="fixed inset-0 bg-gradient-to-br from-gray-900 to-indigo-900 flex items-center justify-center z-50">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 text-white">Eai?</h1>
+            <p class="text-lg md:text-2xl text-indigo-300 mb-8">Explore aqui o passado.</p>
+            <button id="enter-button" class="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-10 rounded-full shadow-lg backdrop-blur-sm border border-white/20 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50">
+                Entrar
+            </button>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal do Site -->
+    <div id="main-content" class="container mx-auto p-4 md:p-8 opacity-0 transition-opacity duration-1000">
+        <!-- Título e Subtítulo -->
+        <header class="text-center my-8">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">Karla</h1>
+            <p class="mt-4 text-lg text-gray-400">Aqui a construção do passado pode alterar o futuro mas o futuro jamais irá alterar o passado.</p>
+        </header>
+
+        <!-- Botões de Navegação -->
+        <nav class="flex flex-wrap justify-center gap-3 md:gap-4 my-8">
+            <button data-target="text-section" class="nav-button bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500/50 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Letter</button>
+            <button data-target="music-section" class="nav-button bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-500/50 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Surpresa</button>
+            <button data-target="gallery-section" class="nav-button bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:ring-teal-500/50 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Fotos</button>
+            <button data-target="image-section" class="nav-button bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:ring-pink-500/50 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Hello?</button>
+            <button data-target="sky-section" class="nav-button bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-500/50 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">Sky</button>
+        </nav>
+
+        <!-- Seções de Conteúdo -->
+        <main id="content-area" class="mt-12">
+            <!-- Seção de Texto -->
+            <div id="text-section" class="content-section hidden p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700">
+                <h2 class="text-3xl font-bold mb-4 text-indigo-300">Carta</h2>
+                <p class="text-gray-300 leading-relaxed">Bom, inicialmente eu tinha o planejamento de criar este local como algo especial e importante para você porém acho que agora ele não faz nem diferença mais, bom, Karla, não sei se você vai ver isso, se vai ler de tudo e etc, mas foi feito com total carinho, eu espero que você goste daqui. Beijos, Eu Te Amo</p>
+            </div>
+
+
+            <!-- Seção de Música -->
+            <div id="music-section" class="content-section hidden p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700 text-center">
+                <h2 class="text-3xl font-bold mb-4 text-purple-300">Surpresa.</h2>
+                <p class="text-gray-400 mb-6">Clique no botão.</p>
+                <button id="play-music-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105">
+                    Toque aqui!
+                </button>
+            </div>
+
+            <!-- Seção de Galeria de Fotos -->
+            <div id="gallery-section" class="content-section hidden p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700">
+                <h2 class="text-3xl font-bold mb-6 text-teal-300 text-center">Galeria de Imagens</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <img src="careca.png" alt="Paisagem 1" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="US.png" alt="Paisagem 2" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img src="skyzap.png" alt="Paisagem 3" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                </div>
+            </div>
+
+            <!-- Seção de Imagem Separada -->
+            <div id="image-section" class="content-section hidden p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700 flex flex-col items-center">
+                 <h2 class="text-3xl font-bold mb-6 text-pink-200">Hello Kitty</h2>
+                <img src="kittycofee.png" alt="Imagem única" class="rounded-lg shadow-xl max-w-full h-auto">
+                <img src="HelloKitty1.png" alt="Imagem única" class="rounded-lg shadow-xl max-w-full h-auto">
+                <img src="Superkitty.png" alt="Imagem única" class="rounded-lg shadow-xl max-w-full h-auto">
+            </div>
+
+            <!-- Seção Imagem Final -->
+            <div id="sky-section" class="content-section hidden p-8 bg-gray-800/50 rounded-lg backdrop-blur-sm border border-gray-700 flex flex-col items-center">
+                 <h2 class="text-3xl font-bold mb-6 text-Pink-300">Céu</h2>
+                 <p class="text-gray-300 leading-relaxed">Bom, como o costume, seus olhos sempre me cativaram, aqui deixo então a maneira que vejo teus olhos, vejo eles da maneira que mais te encata, um reflexo do céu, Eu Te Amo.</p>
+                 <img src="Sky2.png" alt="Paisagem 1" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                 <img src="sky.png" alt="Paisagem 2" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                 <img src="sky3.png" alt="Paisagem 3" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            </div>
+        </main>
+    </div>
+
+    <!-- Player de Áudio Escondido -->
+    <!-- Coloque o nome do seu arquivo de música no 'src'. O arquivo deve estar na mesma pasta que este HTML. -->
+    <audio id="minha-musica" src="moral.mp3" loop></audio>
+
+    <script>
+        // --- LÓGICA GERAL DA PÁGINA ---
+
+        const navButtons = document.querySelectorAll('.nav-button');
+        const contentSections = document.querySelectorAll('.content-section');
+        const contentArea = document.getElementById('content-area');
+
+        // Lida com a tela de entrada
+        window.addEventListener('load', () => {
+            const entryScreen = document.getElementById('entry-screen');
+            const mainContent = document.getElementById('main-content');
+            const enterButton = document.getElementById('enter-button');
+
+            function startSite() {
+                entryScreen.classList.add('hidden');
+                mainContent.style.opacity = '1';
+                showSection('text-section');
+            }
+            
+            enterButton.addEventListener('click', startSite);
+        });
+
+        // Função para mostrar a seção correta e esconder as outras
+        function showSection(targetId) {
+            contentSections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.remove('hidden');
+                    section.style.opacity = 0;
+                    section.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        section.style.opacity = 1;
+                        section.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    section.classList.add('hidden');
+                    section.style.opacity = 0;
+                }
+            });
+        }
+
+        // Adiciona eventos de clique aos botões de navegação
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                showSection(targetId);
+            });
+        });
+
+        // --- LÓGICA DA MÚSICA (Player de Áudio HTML) ---
+        
+        const playMusicBtn = document.getElementById('play-music-btn');
+        const audioPlayer = document.getElementById('minha-musica');
+        
+        playMusicBtn.addEventListener('click', () => {
+            // Verifica se a música está pausada para decidir se deve tocar ou parar
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playMusicBtn.textContent = 'Parar Música';
+                playMusicBtn.classList.remove('bg-purple-600', 'hover:bg-purple-700');
+                playMusicBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+            } else {
+                audioPlayer.pause();
+                playMusicBtn.textContent = 'Toque aqui!';
+                playMusicBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
+                playMusicBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+            }
+        });
+
+    </script>
+</body>
+</html>
+
